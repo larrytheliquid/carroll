@@ -1,10 +1,12 @@
-require "carroll"
+require "#{File.dirname(__FILE__)}/../carroll"
 
 def self.share_specs(name, &block)
   shared_examples_for(name) do
-    describe("[#{name}]", &block)
+    describe(":: #{name} ::", &block)
   end
 end
+
+puts "\n=== Carroll language specifications ==="
 
 share_specs "value expressions" do
   describe "<atom>" do
@@ -30,3 +32,5 @@ share_specs "statements" do
     spec_code "skip"
   end
 end
+
+# TODO: invalid syntax and semantics specs
