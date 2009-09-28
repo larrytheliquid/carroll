@@ -4,6 +4,7 @@ describe "lexer" do
   def self.spec_code(code)
     it code do
       tokens = Carroll::Lexer.new.tokenize(code)
+      p tokens if ENV['DEBUG']
       tokens.should be_kind_of(Array)
       tokens.should_not be_empty
     end
