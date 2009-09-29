@@ -3,6 +3,6 @@
 .#*
 \#*
 *.jar
+*.flymake
 sinatra.log
 pkg
-carroll/parser.rb
