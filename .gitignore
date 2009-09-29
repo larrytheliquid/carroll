@@ -5,3 +5,4 @@
 *.jar
 sinatra.log
 pkg
+carroll/parser.rb

@@ -1,4 +1,4 @@
-class Parser
+class Carroll::Parser
 
 # Abstract machine
 token IDENTIFIER
@@ -15,22 +15,25 @@ rule
     Statements                         { result = Node::AST.new val[0] }
   ;
 
+  Statements:
+    Statement                          { result = val[0] }
+  | Statements Statement               { result = val[0] << val[1] }
+  ;
+
   Statement:
     SKIP                               { result = Node::Skip }
-  | Statements Statement               { result = val[0] << val[1] }
   | IDENTIFIER '=' Value               { result = Node::UnifyVariable.new val[0], val[2] }
   ;
   
   Value:
-    NUMBER                        { result = LiteralNode.new(val[0]) }
-  | TRUE                          { result = LiteralNode.new(true) }
-  | FALSE                         { result = LiteralNode.new(false) }
+    NUMBER                        { result = Node::Literal.new val[0] }
+  | IDENTIFIER                    { result = Node::Number.new val[0] }
   ;
 end
 
 ---- header
-  require "lexer"
-  require "nodes"
+  require "#{File.dirname(__FILE__)}/lexer"
+  require "#{File.dirname(__FILE__)}/nodes"
 
 ---- inner
   def parse(code, show_tokens=false)

@@ -5,7 +5,7 @@ describe "Parser" do
     it code do
       ast = Carroll::Parser.new.parse(code)
       p ast if ENV['DEBUG']
-      ast.should be_kind_of(Carroll::Nodes)
+      ast.should be_kind_of(Carroll::Node::AST)
     end
   end
   
