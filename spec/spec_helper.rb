@@ -6,9 +6,9 @@ def self.share_specs(name, &block)
   end
 end
 
-puts "\n=== Carroll language specifications ==="
+puts "\n=== Carroll language ==="
 
-share_specs "value expressions" do
+share_specs "Value expressions" do
   describe "<atom>" do
     %w[a foo bar larrytheliquid x1 var3].each do |atom|
       spec_code atom
@@ -27,7 +27,7 @@ share_specs "value expressions" do
   end
 end
 
-share_specs "statements" do
+share_specs "Statements" do
   describe "<statement>" do
     spec_code "skip"
   end

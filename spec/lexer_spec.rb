@@ -1,6 +1,6 @@
 require "#{File.dirname(__FILE__)}/spec_helper"
 
-describe "lexer" do
+describe "Lexer" do
   def self.spec_code(code)
     it code do
       tokens = Carroll::Lexer.new.tokenize(code)
@@ -10,6 +10,6 @@ describe "lexer" do
     end
   end
   
-  it_should_behave_like "value expressions"
-  it_should_behave_like "statements"
+  it_should_behave_like "Value expressions"
+  it_should_behave_like "Statements"
 end

@@ -1,0 +1,29 @@
+/* Carroll language type hierarchy */
+/* Graphiz format http://graph.gafol.net */
+digraph "Carroll language" {
+  node [color=lightblue2, style=filled];
+  n1 [label="..."]; n2 [label="..."];
+  n3 [label="..."]; n4 [label="..."];
+
+  Value -> Number;
+  Number -> Int;
+  Int -> Char;
+  Number -> Float;
+
+  Value -> Record;
+  Record -> Tuple;
+  Tuple -> Literal;
+  Literal -> Bool;
+  Bool -> True;
+  Bool -> False;
+  Literal -> Atom;
+  Literal -> n1;
+  Tuple -> List;
+  List -> String;
+  Tuple -> n2;
+
+  Value -> Procedure;
+  Procedure -> n3;
+
+  Value -> n4;
+}
