@@ -121,7 +121,7 @@ module_eval(<<'.,.,', 'grammar.y', 14)
 
 module_eval(<<'.,.,', 'grammar.y', 15)
   def _reduce_2(val, _values, result)
-     result = val[0] << val[2] 
+     result = val[0] << val[1] 
     result
   end
 .,.,

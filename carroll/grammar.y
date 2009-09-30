@@ -13,7 +13,7 @@ token SKIP
 rule
   Statements:
     Statement                          { result = Node::AST.new val[0] }
-  | Statements Statement               { result = val[0] << val[2] }
+  | Statements Statement               { result = val[0] << val[1] }
   ;
 
   Statement:
