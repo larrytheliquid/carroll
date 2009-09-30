@@ -25,11 +25,12 @@ class Carroll::Lexer
         tokens << [:NUMBER, number.to_i]
         i += number.size
 
-      elsif space = chunk.match(/\A(\w+)/, 1)
+      elsif space = chunk[/\A(\s+)/, 1]
         i += space.size
 
-      else # token
-        raise "Tokens not implemented: #{chunk.inspect}"
+      else token = chunk[0,1]
+        tokens << [token, token]
+        i += 1
       end
     end
 

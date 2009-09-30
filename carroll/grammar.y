@@ -11,13 +11,9 @@ token NUMBER
 token SKIP
 
 rule
-  Root:
-    Statements                         { result = Node::AST.new val[0] }
-  ;
-
   Statements:
-    Statement                          { result = val[0] }
-  | Statements Statement               { result = val[0] << val[1] }
+    Statement                          { result = Node::AST.new val[0] }
+  | Statements Statement               { result = val[0] << val[2] }
   ;
 
   Statement:
@@ -26,8 +22,8 @@ rule
   ;
   
   Value:
-    NUMBER                        { result = Node::Literal.new val[0] }
-  | IDENTIFIER                    { result = Node::Number.new val[0] }
+    NUMBER                        { result = Node::Number.new val[0] }
+  | IDENTIFIER                    { result = Node::Literal.new val[0] }
   ;
 end
 
