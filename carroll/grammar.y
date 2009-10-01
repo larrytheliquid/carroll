@@ -23,7 +23,7 @@ rule
   
   Value:
     NUMBER                        { result = Node::Number.new val[0] }
-  | IDENTIFIER                    { result = Node::Literal.new val[0] }
+  | LITERAL                       { result = Node::Literal.new val[0] }
   ;
 end
 

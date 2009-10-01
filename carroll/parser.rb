@@ -25,13 +25,13 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 35)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     6,     1,     1,     5,     2,     2,     8,    11,     9 ]
+     6,     1,     1,     5,     2,     2,     8,     9,    11 ]
 
 racc_action_check = [
-     3,     0,     3,     1,     0,     3,     5,     6,     5 ]
+     3,     0,     3,     1,     0,     3,     5,     5,     6 ]
 
 racc_action_pointer = [
-    -1,    -3,   nil,     0,   nil,     4,     7,   nil,   nil,   nil,
+    -1,    -3,   nil,     0,   nil,     3,     8,   nil,   nil,   nil,
    nil,   nil ]
 
 racc_action_default = [

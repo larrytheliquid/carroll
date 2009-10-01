@@ -10,7 +10,8 @@ module Carroll::Node
     end
     
     def eval(environment)
-      raise 'noop'
+      @nodes.each {|node| node.eval(environment) }
+      environment
     end
   end
 

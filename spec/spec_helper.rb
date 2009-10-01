@@ -31,9 +31,9 @@ share_specs "Statements" do
   describe "<statement>" do
     spec_code "skip"
     spec_code "LarryTheLiquid = 1337"
-    spec_code "skip LarryTheLiquid = 1337"
-    spec_code "A = 1 B = 2 C = 3"
-    spec_code "skip skip Foo = 42 skip"    
+    spec_code "skip LarryTheLiquid = 42"
+    spec_code "A = 1 B = true C = foo"
+    spec_code "skip skip Foo = false skip"    
   end
 end
 
