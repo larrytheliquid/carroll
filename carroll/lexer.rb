@@ -1,5 +1,5 @@
 class Carroll::Lexer
-  KEYWORDS = %w[skip]
+  KEYWORDS = %w[skip local in end]
   
   def tokenize(code)
     code.strip!

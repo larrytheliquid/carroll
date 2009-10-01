@@ -9,6 +9,7 @@ token NUMBER
 
 # Statements
 token SKIP
+token LOCAL IN END
 
 rule
   Statements:
@@ -18,6 +19,7 @@ rule
 
   Statement:
     SKIP                               { result = Node::Skip }
+  | LOCAL IDENTIFIER IN Statements END { result = Node::Local.new val[0], val[3] }
   | IDENTIFIER '=' Value               { result = Node::UnifyVariable.new val[0], val[2] }
   ;
   

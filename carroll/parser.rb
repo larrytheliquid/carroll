@@ -12,7 +12,7 @@ require 'racc/parser.rb'
 module Carroll
   class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 35)
+module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 37)
   def parse(code)
     @tokens = Carroll::Lexer.new.tokenize(code)
     do_parse
@@ -25,43 +25,48 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 35)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     6,     1,     1,     5,     2,     2,     8,     9,    11 ]
+     3,    12,    13,     4,     5,     6,    16,     3,    14,     3,
+     4,     5,     4,     5,     3,     9,     8,     4,     5,    10 ]
 
 racc_action_check = [
-     3,     0,     3,     1,     0,     3,     5,     5,     6 ]
+    15,     8,     8,    15,    15,     1,    15,     1,     9,    14,
+     1,     1,    14,    14,     0,     5,     3,     0,     0,     6 ]
 
 racc_action_pointer = [
-    -1,    -3,   nil,     0,   nil,     3,     8,   nil,   nil,   nil,
-   nil,   nil ]
+    12,     5,   nil,     7,   nil,    13,    19,   nil,    -2,     1,
+   nil,   nil,   nil,   nil,     7,    -2,   nil ]
 
 racc_action_default = [
-    -7,    -7,    -3,    -7,    -1,    -7,    -7,    -2,    -6,    -5,
-    -4,    12 ]
+    -8,    -8,    -1,    -8,    -3,    -8,    -8,    -2,    -8,    -8,
+    17,    -5,    -7,    -6,    -8,    -8,    -4 ]
 
 racc_goto_table = [
-     4,     3,    10,     7 ]
+     1,     7,    11,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,    15,     7 ]
 
 racc_goto_check = [
-     2,     1,     3,     2 ]
+     1,     2,     3,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,     1,     2 ]
 
 racc_goto_pointer = [
-   nil,     1,     0,    -3 ]
+   nil,     0,     0,    -6 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil ]
+   nil,   nil,     2,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 8, :_reduce_1,
-  2, 8, :_reduce_2,
-  1, 9, :_reduce_3,
-  3, 9, :_reduce_4,
-  1, 10, :_reduce_5,
-  1, 10, :_reduce_6 ]
+  1, 11, :_reduce_1,
+  2, 11, :_reduce_2,
+  1, 12, :_reduce_3,
+  5, 12, :_reduce_4,
+  3, 12, :_reduce_5,
+  1, 13, :_reduce_6,
+  1, 13, :_reduce_7 ]
 
-racc_reduce_n = 7
+racc_reduce_n = 8
 
-racc_shift_n = 12
+racc_shift_n = 17
 
 racc_token_table = {
   false => 0,
@@ -70,9 +75,12 @@ racc_token_table = {
   :LITERAL => 3,
   :NUMBER => 4,
   :SKIP => 5,
-  "=" => 6 }
+  :LOCAL => 6,
+  :IN => 7,
+  :END => 8,
+  "=" => 9 }
 
-racc_nt_base = 7
+racc_nt_base = 10
 
 racc_use_result_var = true
 
@@ -99,6 +107,9 @@ Racc_token_to_s_table = [
   "LITERAL",
   "NUMBER",
   "SKIP",
+  "LOCAL",
+  "IN",
+  "END",
   "\"=\"",
   "$start",
   "Statements",
@@ -111,43 +122,50 @@ Racc_debug_parser = false
 
 # reduce 0 omitted
 
-module_eval(<<'.,.,', 'grammar.y', 14)
+module_eval(<<'.,.,', 'grammar.y', 15)
   def _reduce_1(val, _values, result)
      result = Node::AST.new val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 15)
+module_eval(<<'.,.,', 'grammar.y', 16)
   def _reduce_2(val, _values, result)
      result = val[0] << val[1] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 19)
+module_eval(<<'.,.,', 'grammar.y', 20)
   def _reduce_3(val, _values, result)
      result = Node::Skip 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 20)
+module_eval(<<'.,.,', 'grammar.y', 21)
   def _reduce_4(val, _values, result)
+     result = Node::Local.new val[0], val[3] 
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 22)
+  def _reduce_5(val, _values, result)
      result = Node::UnifyVariable.new val[0], val[2] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 24)
-  def _reduce_5(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 26)
+  def _reduce_6(val, _values, result)
      result = Node::Number.new val[0] 
     result
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 25)
-  def _reduce_6(val, _values, result)
+module_eval(<<'.,.,', 'grammar.y', 27)
+  def _reduce_7(val, _values, result)
      result = Node::Literal.new val[0] 
     result
   end
