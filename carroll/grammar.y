@@ -32,9 +32,8 @@ end
   require "#{File.dirname(__FILE__)}/nodes"
 
 ---- inner
-  def parse(code, show_tokens=false)
+  def parse(code)
     @tokens = Carroll::Lexer.new.tokenize(code)
-    p @tokens if show_tokens
     do_parse
   end
   
