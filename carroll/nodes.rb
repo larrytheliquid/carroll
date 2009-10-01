@@ -17,7 +17,7 @@ module Carroll::Node
 
   module Skip
     def self.eval(environment)
-      raise 'noop'
+      # noop
     end
   end
 

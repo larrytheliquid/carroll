@@ -25,4 +25,10 @@ namespace :spec do
     t.spec_files = FileList["#{File.dirname(__FILE__)}/spec/parser_spec.rb"]
     t.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
   end
+
+  desc "run runtime specs"
+  Spec::Rake::SpecTask.new :runtime do |t|
+    t.spec_files = FileList["#{File.dirname(__FILE__)}/spec/runtime_spec.rb"]
+    t.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
+  end
 end
