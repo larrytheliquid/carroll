@@ -145,7 +145,7 @@ module_eval(<<'.,.,', 'grammar.y', 20)
 
 module_eval(<<'.,.,', 'grammar.y', 21)
   def _reduce_4(val, _values, result)
-     result = Node::Local.new val[0], val[3] 
+     result = Node::Local.new val[1], val[3] 
     result
   end
 .,.,

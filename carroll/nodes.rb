@@ -27,7 +27,8 @@ module Carroll::Node
     end
 
     def eval(environment)
-      raise 'noop'
+      p environment.merge(@name => Carroll::Runtime::Variable.new)
+      @body.eval environment.merge(@name => Carroll::Runtime::Variable.new)
     end
   end
 
@@ -37,7 +38,7 @@ module Carroll::Node
     end
 
     def eval(environment)
-      raise 'noop'
+      environment[@name].bind @value.eval(environment)
     end
   end
 
@@ -47,7 +48,7 @@ module Carroll::Node
     end
     
     def eval(environment)
-      raise 'noop'
+      @value.to_i
     end
   end
 

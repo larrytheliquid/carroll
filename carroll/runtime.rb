@@ -1,6 +1,12 @@
-# TODO: Environment class < Hash where merge is adjunction
 module Carroll::Runtime
-  # environment
-  # variable
-  # store
+  class Variable
+    def bind(value)
+      @value = value
+    end
+
+    def value
+      raise "#{self.inspect} unbound" unless defined?(@value)
+      @value
+    end
+  end
 end
