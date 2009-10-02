@@ -27,7 +27,6 @@ module Carroll::Node
     end
 
     def eval(environment)
-      p environment.merge(@name => Carroll::Runtime::Variable.new)
       @body.eval environment.merge(@name => Carroll::Runtime::Variable.new)
     end
   end
@@ -58,7 +57,7 @@ module Carroll::Node
     end
     
     def eval(environment)
-      raise 'noop'
+      @value.to_sym
     end
   end
 end

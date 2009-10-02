@@ -4,7 +4,7 @@ module Carroll::Runtime
       @value = value
     end
 
-    def value
+    def dereference
       raise "#{self.inspect} unbound" unless defined?(@value)
       @value
     end
