@@ -1,7 +1,7 @@
 require "#{File.dirname(__FILE__)}/../carroll"
 
-def self.share_specs(name, &block)
-  shared_examples_for(name) do
+def self.share_specs name, &block
+  shared_examples_for name do
     describe(":: #{name} ::", &block)
   end
 end

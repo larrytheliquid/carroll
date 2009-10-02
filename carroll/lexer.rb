@@ -1,7 +1,7 @@
 class Carroll::Lexer
   KEYWORDS = %w[skip local in end]
   
-  def tokenize(code)
+  def tokenize code
     code.strip!
     code_size = code.size
     i , tokens = 0, []

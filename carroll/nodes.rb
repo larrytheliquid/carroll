@@ -1,62 +1,62 @@
 module Carroll::Node
   class AST
-    def initialize(*nodes)
+    def initialize *nodes
       @nodes = nodes
     end
     
-    def <<(node)
+    def << node
       @nodes << node
       self
     end
     
-    def eval(environment)
-      @nodes.each {|node| node.eval(environment) }
+    def eval environment
+      @nodes.each {|node| node.eval environment }
       environment
     end
   end
 
   module Skip
-    def self.eval(environment)
+    def self.eval environment
       # noop
     end
   end
 
   class Local
-    def initialize(name, body)
+    def initialize name, body
       @name, @body = name, body
     end
 
-    def eval(environment)
+    def eval environment
       @body.eval environment.merge(@name => Carroll::Runtime::Variable.new)
     end
   end
 
   class UnifyVariable
-    def initialize(name, value)
+    def initialize name, value
       @name, @value = name, value
     end
 
-    def eval(environment)
+    def eval environment
       environment[@name].bind @value.eval(environment)
     end
   end
 
   class Number
-    def initialize(value)
+    def initialize value
       @value = value
     end
     
-    def eval(environment)
+    def eval environment
       @value.to_i
     end
   end
 
   class Literal
-    def initialize(value)
+    def initialize value
       @value = value
     end
     
-    def eval(environment)
+    def eval environment
       @value.to_sym
     end
   end

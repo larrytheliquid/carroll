@@ -13,8 +13,8 @@ module Carroll
   class Parser < Racc::Parser
 
 module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 37)
-  def parse(code)
-    @tokens = Carroll::Lexer.new.tokenize(code)
+  def parse code
+    @tokens = Carroll::Lexer.new.tokenize code
     do_parse
   end
   

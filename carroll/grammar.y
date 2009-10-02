@@ -24,8 +24,8 @@ rule
   ;
   
   Value:
-    NUMBER                        { result = Node::Number.new val[0] }
-  | LITERAL                       { result = Node::Literal.new val[0] }
+    NUMBER                             { result = Node::Number.new val[0] }
+  | LITERAL                            { result = Node::Literal.new val[0] }
   ;
 end
 
@@ -34,8 +34,8 @@ end
   require "#{File.dirname(__FILE__)}/nodes"
 
 ---- inner
-  def parse(code)
-    @tokens = Carroll::Lexer.new.tokenize(code)
+  def parse code
+    @tokens = Carroll::Lexer.new.tokenize code
     do_parse
   end
   

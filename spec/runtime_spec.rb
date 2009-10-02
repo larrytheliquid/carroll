@@ -1,9 +1,9 @@
 require "#{File.dirname(__FILE__)}/spec_helper"
 
 describe "Runtime" do
-  def self.spec_code(code, expected_bindings={})
+  def self.spec_code code, expected_bindings={}
     it code do
-      ast = Carroll::Parser.new.parse(code)
+      ast = Carroll::Parser.new.parse code
 
       environment = Hash[*expected_bindings.map do |identifier, _|
         [identifier, Carroll::Runtime::Variable.new]

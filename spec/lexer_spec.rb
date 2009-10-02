@@ -1,9 +1,9 @@
 require "#{File.dirname(__FILE__)}/spec_helper"
 
 describe "Lexer" do
-  def self.spec_code(code, _={})
+  def self.spec_code code, _={}
     it code do
-      tokens = Carroll::Lexer.new.tokenize(code)
+      tokens = Carroll::Lexer.new.tokenize code
       p tokens if ENV['DEBUG']
       tokens.should be_kind_of(Array)
       tokens.should_not be_empty
