@@ -6,18 +6,18 @@
 
 require 'racc/parser.rb'
 
-  require "#{File.dirname(__FILE__)}/lexer"
-  require "#{File.dirname(__FILE__)}/nodes"
+  require "#{File.dirname __FILE__}/lexer"
+  require "#{File.dirname __FILE__}/nodes"
 
 module Carroll
   class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 37)
+module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 38)
   def parse code
     @tokens = Carroll::Lexer.new.tokenize code
     do_parse
   end
-  
+
   def next_token
     @tokens.shift
   end
@@ -25,28 +25,30 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 37)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     3,    12,    13,     4,     5,     6,    16,     3,    14,     3,
-     4,     5,     4,     5,     3,     9,     8,     4,     5,    10 ]
+     3,    15,     9,     4,     5,     6,    17,     3,     8,     3,
+     4,     5,     4,     5,     3,    10,   nil,     4,     5,    12,
+    13,    14 ]
 
 racc_action_check = [
-    15,     8,     8,    15,    15,     1,    15,     1,     9,    14,
-     1,     1,    14,    14,     0,     5,     3,     0,     0,     6 ]
+    16,     9,     5,    16,    16,     1,    16,     1,     3,    15,
+     1,     1,    15,    15,     0,     6,   nil,     0,     0,     8,
+     8,     8 ]
 
 racc_action_pointer = [
-    12,     5,   nil,     7,   nil,    13,    19,   nil,    -2,     1,
-   nil,   nil,   nil,   nil,     7,    -2,   nil ]
+    12,     5,   nil,    -1,   nil,     0,    15,   nil,    17,    -6,
+   nil,   nil,   nil,   nil,   nil,     7,    -2,   nil ]
 
 racc_action_default = [
-    -8,    -8,    -1,    -8,    -3,    -8,    -8,    -2,    -8,    -8,
-    17,    -5,    -7,    -6,    -8,    -8,    -4 ]
+    -9,    -9,    -1,    -9,    -3,    -9,    -9,    -2,    -9,    -9,
+    18,    -6,    -5,    -8,    -7,    -9,    -9,    -4 ]
 
 racc_goto_table = [
      1,     7,    11,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,    15,     7 ]
+   nil,   nil,   nil,   nil,   nil,    16,     7 ]
 
 racc_goto_check = [
      1,     2,     3,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,     1,     2 ]
+   nil,   nil,   nil,   nil,   nil,     1,     2 ]
 
 racc_goto_pointer = [
    nil,     0,     0,    -6 ]
@@ -61,12 +63,13 @@ racc_reduce_table = [
   1, 12, :_reduce_3,
   5, 12, :_reduce_4,
   3, 12, :_reduce_5,
-  1, 13, :_reduce_6,
-  1, 13, :_reduce_7 ]
+  3, 12, :_reduce_6,
+  1, 13, :_reduce_7,
+  1, 13, :_reduce_8 ]
 
-racc_reduce_n = 8
+racc_reduce_n = 9
 
-racc_shift_n = 17
+racc_shift_n = 18
 
 racc_token_table = {
   false => 0,
@@ -157,15 +160,22 @@ module_eval(<<'.,.,', 'grammar.y', 22)
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 26)
+module_eval(<<'.,.,', 'grammar.y', 23)
   def _reduce_6(val, _values, result)
-     result = Node::Number.new val[0] 
+     result = Node::UnifyVariable.new val[0], val[2] 
     result
   end
 .,.,
 
 module_eval(<<'.,.,', 'grammar.y', 27)
   def _reduce_7(val, _values, result)
+     result = Node::Number.new val[0] 
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 28)
+  def _reduce_8(val, _values, result)
      result = Node::Literal.new val[0] 
     result
   end

@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/spec_helper"
+require "#{File.dirname __FILE__}/spec_helper"
 
 describe "Lexer" do
   def self.spec_code code, _={}

@@ -3,12 +3,12 @@ module Carroll::Node
     def initialize *nodes
       @nodes = nodes
     end
-    
+
     def << node
       @nodes << node
       self
     end
-    
+
     def eval environment
       @nodes.each {|node| node.eval environment }
       environment
@@ -32,12 +32,17 @@ module Carroll::Node
   end
 
   class UnifyVariable
-    def initialize name, value
-      @name, @value = name, value
+    def initialize name, target
+      @name, @target = name, target
     end
 
     def eval environment
-      environment[@name].bind @value.eval(environment)
+      environment.fetch(@name).bind case @target
+      when Number, Literal
+        @target.value
+      else
+        environment.fetch(@target).dereference
+      end
     end
   end
 
@@ -45,8 +50,8 @@ module Carroll::Node
     def initialize value
       @value = value
     end
-    
-    def eval environment
+
+    def value
       @value.to_i
     end
   end
@@ -55,8 +60,8 @@ module Carroll::Node
     def initialize value
       @value = value
     end
-    
-    def eval environment
+
+    def value
       @value.to_sym
     end
   end
