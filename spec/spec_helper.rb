@@ -34,7 +34,7 @@ share_specs "Statements" do
     spec_code "Result = 42", "Result" => 42
     spec_code "local LarryTheLiquid in LarryTheLiquid = 1337 end"
     spec_code "local LarryTheLiquid in skip LarryTheLiquid = 42 end"
-    spec_code "local A in local B in A = 1 B = true  local C in C = foo end end end"
+    spec_code "local A in local B in A = 1 B = true local C in C = foo end end end"
     spec_code "skip skip local Foo in Foo = false skip end skip"
   end
 end
