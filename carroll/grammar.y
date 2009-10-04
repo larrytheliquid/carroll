@@ -11,6 +11,7 @@ token NUMBER
 token SKIP
 token LOCAL IN
 token IF THEN ELSE
+token PROC
 token END
 
 rule
@@ -29,6 +30,7 @@ rule
 
   Value:
     NUMBER                                            { result = Node::Number.new val[0] }
+  | PROC '{' '$' IDENTIFIER '}' Statements END        { result = Node::Procedure.new val[3], val[5] }
   | LITERAL                                           { result = Node::Literal.new val[0] }
   ;
 end

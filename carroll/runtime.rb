@@ -51,6 +51,13 @@ module Carroll::Runtime
       end
     end
 
+    class Procedure < Value
+      def initialize environment, arg, body
+        @environment, @arg, @body = environment, arg, body
+        super self
+      end
+    end
+
     class Literal < Value
       def initialize value
         super value.to_sym

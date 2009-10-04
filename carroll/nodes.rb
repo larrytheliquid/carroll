@@ -47,7 +47,7 @@ module Carroll::Node
     end
 
     def eval environment
-      environment.fetch(@name).unify @target.to_value
+      environment.fetch(@name).unify @target.eval(environment)
     end
   end
 
@@ -73,8 +73,18 @@ module Carroll::Node
       @value = value
     end
 
-    def to_value
+    def eval _
       Carroll::Runtime::Value::Number.new @value
+    end
+  end
+
+  class Procedure
+    def initialize arg, body
+      @arg, @body = arg, body
+    end
+
+    def eval environment
+      Carroll::Runtime::Value::Procedure.new environment.dup, @arg, @body
     end
   end
 
@@ -83,7 +93,7 @@ module Carroll::Node
       @value = value
     end
 
-    def to_value
+    def eval _
       Carroll::Runtime::Value::Literal.new @value
     end
   end

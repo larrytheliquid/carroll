@@ -1,5 +1,5 @@
 class Carroll::Lexer
-  KEYWORDS = %w[skip local in if then else end]
+  KEYWORDS = %w[skip local in if then else proc end]
 
   def tokenize code
     code.strip!

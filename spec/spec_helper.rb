@@ -25,6 +25,10 @@ share_specs "Value expressions" do
     spec_code "true"
     spec_code "false"
   end
+
+  describe "<proc>" do
+    spec_code "proc { $ X } skip skip end"
+  end
 end
 
 share_specs "Statements" do
@@ -34,6 +38,7 @@ share_specs "Statements" do
     spec_code "Answer = 42", "Answer" => "42"
     spec_code "local LarryTheLiquid in LarryTheLiquid = 1337 Result = LarryTheLiquid end",
               "Result" => "1337"
+    spec_code "local P in P = proc { $ X } skip end end"
     spec_code "local Condition in Condition = true if Condition then Result = 1337 else skip end end",
               "Result" => "1337"
     spec_code "local Condition in Condition = false if Condition then skip else Result = 1337 end end",
