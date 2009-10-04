@@ -51,6 +51,23 @@ module Carroll::Node
     end
   end
 
+  class Conditional
+    def initialize condition, if_body, else_body
+      @condition, @if_body, @else_body = condition, if_body, else_body
+    end
+
+    def eval environment
+      condition_value = environment.fetch(@condition).value
+      if condition_value == Carroll::Runtime::Value::Literal.new("true")
+        @if_body.eval environment
+      elsif condition_value == Carroll::Runtime::Value::Literal.new("false")
+        @else_body.eval environment
+      else
+        raise %{Conditionals must branch on "true" or "false"}
+      end
+    end
+  end
+
   class Number
     def initialize value
       @value = value

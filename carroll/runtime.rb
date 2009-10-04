@@ -27,7 +27,7 @@ module Carroll::Runtime
       @reference
     end
 
-    def references?(entity) @reference == entity end
+    def references?(entity) @reference.equal? entity end
 
   private
 
@@ -38,7 +38,12 @@ module Carroll::Runtime
   class Value < Entity
     def initialize(value) @value = value end
     def value() self end
+    def _value() @value end
     def print() @value.to_s end
+
+    def ==(other)
+      @value == other._value
+    end
 
     class Number < Value
       def initialize value

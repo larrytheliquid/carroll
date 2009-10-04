@@ -34,6 +34,12 @@ share_specs "Statements" do
     spec_code "Answer = 42", "Answer" => "42"
     spec_code "local LarryTheLiquid in LarryTheLiquid = 1337 Result = LarryTheLiquid end",
               "Result" => "1337"
+    spec_code "local Condition in Condition = true if Condition then Result = 1337 else skip end end",
+              "Result" => "1337"
+    spec_code "local Condition in Condition = false if Condition then skip else Result = 1337 end end",
+              "Result" => "1337"
+    spec_code "local T in T = true local F in F = false if T then if F then skip else Result = waldo end else skip end end end",
+              "Result" => "waldo"
     spec_code "local X in X = 7 local Y in Y = X  Y2 = Y X2 = X end end",
               "X2" => "7", "Y2" => "7"
     spec_code "local X in local Y in Y = X X = 7 Y2 = Y X2 = X end end",

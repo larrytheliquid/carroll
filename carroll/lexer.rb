@@ -1,6 +1,6 @@
 class Carroll::Lexer
-  KEYWORDS = %w[skip local in end]
-  
+  KEYWORDS = %w[skip local in if then else end]
+
   def tokenize code
     code.strip!
     code_size = code.size
@@ -20,7 +20,7 @@ class Carroll::Lexer
           [:LITERAL, literal]
         end
         i += literal.size
-        
+
       elsif number = chunk[/\A([0-9]+)/, 1]
         tokens << [:NUMBER, number.to_i]
         i += number.size
