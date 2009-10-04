@@ -162,7 +162,7 @@ module_eval(<<'.,.,', 'grammar.y', 22)
 
 module_eval(<<'.,.,', 'grammar.y', 23)
   def _reduce_6(val, _values, result)
-     result = Node::UnifyVariable.new val[0], val[2] 
+     result = Node::UnifyValue.new val[0], val[2] 
     result
   end
 .,.,

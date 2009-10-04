@@ -37,12 +37,17 @@ module Carroll::Node
     end
 
     def eval environment
-      environment.fetch(@name).bind case @target
-      when Number, Literal
-        @target.value
-      else
-        environment.fetch(@target).dereference
-      end
+      environment.fetch(@name).unify environment.fetch(@target)
+    end
+  end
+
+  class UnifyValue
+    def initialize name, target
+      @name, @target = name, target
+    end
+
+    def eval environment
+      environment.fetch(@name).unify @target.to_value
     end
   end
 
@@ -51,8 +56,8 @@ module Carroll::Node
       @value = value
     end
 
-    def value
-      @value.to_i
+    def to_value
+      Carroll::Runtime::Value::Number.new @value
     end
   end
 
@@ -61,8 +66,8 @@ module Carroll::Node
       @value = value
     end
 
-    def value
-      @value.to_sym
+    def to_value
+      Carroll::Runtime::Value::Literal.new @value
     end
   end
 end

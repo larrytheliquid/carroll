@@ -21,7 +21,7 @@ rule
     SKIP                               { result = Node::Skip }
   | LOCAL IDENTIFIER IN Statements END { result = Node::Local.new val[1], val[3] }
   | IDENTIFIER '=' IDENTIFIER          { result = Node::UnifyVariable.new val[0], val[2] }
-  | IDENTIFIER '=' Value               { result = Node::UnifyVariable.new val[0], val[2] }
+  | IDENTIFIER '=' Value               { result = Node::UnifyValue.new val[0], val[2] }
   ;
 
   Value:

@@ -2,7 +2,7 @@ require "#{File.dirname __FILE__}/spec_helper"
 
 describe "Runtime" do
   def self.spec_code code, expected_bindings={}
-    it code do
+    it "(#{code}, #{expected_bindings.inspect})" do
       ast = Carroll::Parser.new.parse code
 
       environment = Hash[*expected_bindings.map do |identifier, _|
@@ -10,7 +10,7 @@ describe "Runtime" do
       end.flatten]
 
       Hash[*ast.eval(environment).map do |identifier, variable|
-        [identifier, variable.dereference.to_s]
+        [identifier, variable.value.print]
       end.flatten].should == expected_bindings
     end
   end
