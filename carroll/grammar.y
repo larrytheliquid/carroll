@@ -21,7 +21,7 @@ rule
   ;
 
   Identifiers:
-    IDENTIFIER                                        { result = Array(val[0]) }
+    IDENTIFIER                                        { result = Array.[] val[0] }
   | Identifiers IDENTIFIER                            { result = val[0] << val[1] }
   ;
 
@@ -37,7 +37,11 @@ rule
   Value:
     NUMBER                                            { result = Node::Number.new val[0] }
   | PROC '{' '$' Identifiers '}' Statements END       { result = Node::Procedure.new val[3], val[5] }
-  | LITERAL                                           { result = Node::Literal.new val[0] }
+  | Record                                            { result = val[0] }
+  ;
+
+  Record:
+    LITERAL                                           { result = Node::Literal.new val[0] }
   ;
 end
 
