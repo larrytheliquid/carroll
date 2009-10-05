@@ -42,6 +42,12 @@ rule
 
   Record:
     LITERAL                                           { result = Node::Literal.new val[0] }
+  | LITERAL'('Feature':' IDENTIFIER')'                { result = Node::Literal.new val[0] }
+  ;
+
+  Feature:
+    NUMBER                                            { result = Node::Number.new val[0] }
+  | LITERAL                                           { result = Node::Literal.new val[0] }
   ;
 end
 

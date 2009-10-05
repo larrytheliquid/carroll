@@ -15,6 +15,12 @@ share_specs "Value expressions" do
     end
   end
 
+  describe "<record>" do
+    ["numbers(one:One)", "numbers(1:One)"].each do |record|
+      spec_code record
+    end
+  end
+
   describe "<int>" do
     %w[0 1 2 7 45 1337].each do |int|
       spec_code int
