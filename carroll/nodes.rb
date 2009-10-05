@@ -68,6 +68,16 @@ module Carroll::Node
     end
   end
 
+  class Application
+    def initialize name, target
+      @name, @target = name, target
+    end
+
+    def eval environment
+      environment.fetch(@name).value.apply environment.fetch(@target)
+    end
+  end
+
   class Number
     def initialize value
       @value = value
@@ -79,12 +89,12 @@ module Carroll::Node
   end
 
   class Procedure
-    def initialize arg, body
-      @arg, @body = arg, body
+    def initialize param, body
+      @param, @body = param, body
     end
 
     def eval environment
-      Carroll::Runtime::Value::Procedure.new environment.dup, @arg, @body
+      Carroll::Runtime::Value::Procedure.new environment.dup, @param, @body
     end
   end
 

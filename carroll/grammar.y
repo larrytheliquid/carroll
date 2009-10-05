@@ -26,6 +26,7 @@ rule
   | IDENTIFIER '=' IDENTIFIER                         { result = Node::UnifyVariable.new val[0], val[2] }
   | IDENTIFIER '=' Value                              { result = Node::UnifyValue.new val[0], val[2] }
   | IF IDENTIFIER THEN Statements ELSE Statements END { result = Node::Conditional.new val[1], val[3], val[5] }
+  | '{' IDENTIFIER IDENTIFIER '}'                     { result = Node::Application.new val[1], val[2] }
   ;
 
   Value:

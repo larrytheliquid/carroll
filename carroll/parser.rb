@@ -12,7 +12,7 @@ require 'racc/parser.rb'
 module Carroll
   class Parser < Racc::Parser
 
-module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 43)
+module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 44)
   def parse code
     @tokens = Carroll::Lexer.new.tokenize code
     do_parse
@@ -25,50 +25,56 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 43)
 ##### State transition tables begin ###
 
 racc_action_table = [
-     1,     8,    23,     2,     3,     1,     5,    11,     2,     3,
-    31,     5,    17,     1,    26,    29,     2,     3,    20,     5,
-    13,    14,    15,    24,     1,    28,     7,     2,     3,    12,
-     5,     9,    25,     1,    19,    18,     2,     3,     1,     5,
-   nil,     2,     3,     1,     5,   nil,     2,     3,     1,     5,
-   nil,     2,     3,     1,     5,   nil,     2,     3,     1,     5,
-   nil,     2,     3,   nil,     5 ]
+    11,    13,     1,    21,    20,     3,     4,     1,     6,    19,
+     3,     4,     1,     6,     2,     3,     4,     1,     6,     2,
+     3,     4,    33,     6,     2,    27,    22,     1,    23,     2,
+     3,     4,     1,     6,    30,     3,     4,    10,     6,     2,
+    29,    32,     1,     9,     2,     3,     4,     1,     6,     8,
+     3,     4,    28,     6,     2,    24,   nil,     1,   nil,     2,
+     3,     4,     1,     6,   nil,     3,     4,   nil,     6,     2,
+   nil,   nil,    35,   nil,     2,    15,    16,    17,   nil,   nil,
+   nil,   nil,   nil,   nil,    14 ]
 
 racc_action_check = [
-    30,     3,    20,    30,    30,    27,    30,     5,    27,    27,
-    30,    27,     8,    21,    23,    27,    21,    21,    12,    21,
-     7,     7,     7,    21,    22,    26,     1,    22,    22,     7,
-    22,     4,    22,     4,    11,     9,     4,     4,    17,     4,
-   nil,    17,    17,     0,    17,   nil,     0,     0,    28,     0,
-   nil,    28,    28,    25,    28,   nil,    25,    25,    19,    25,
-   nil,    19,    19,   nil,    19 ]
+     5,     6,     5,    11,    10,     5,     5,     0,     5,     9,
+     0,     0,    31,     0,     5,    31,    31,    29,    31,     0,
+    29,    29,    31,    29,    31,    23,    13,    32,    14,    29,
+    32,    32,    26,    32,    27,    26,    26,     4,    26,    32,
+    26,    30,    25,     2,    26,    25,    25,    22,    25,     1,
+    22,    22,    25,    22,    25,    19,   nil,    20,   nil,    22,
+    20,    20,    34,    20,   nil,    34,    34,   nil,    34,    20,
+   nil,   nil,    34,   nil,    34,     8,     8,     8,   nil,   nil,
+   nil,   nil,   nil,   nil,     8 ]
 
 racc_action_pointer = [
-    41,    13,   nil,    -1,    31,     5,   nil,    18,     5,    35,
-   nil,    25,     4,   nil,   nil,   nil,   nil,    36,   nil,    56,
-   -13,    11,    22,    12,   nil,    51,     9,     3,    46,   nil,
-    -2,   nil ]
+     5,    36,    41,   nil,    35,     0,    -1,   nil,    73,     7,
+    -3,     3,   nil,    17,    14,   nil,   nil,   nil,   nil,    40,
+    55,   nil,    45,     9,   nil,    40,    30,    32,   nil,    15,
+    26,    10,    25,   nil,    60,   nil ]
 
 racc_action_default = [
-   -11,   -11,    -3,   -11,   -11,   -11,    -1,   -11,   -11,   -11,
-    -2,   -11,   -11,    -5,    -9,    -8,    -6,   -11,    32,   -11,
-   -11,   -11,   -11,   -11,    -4,   -11,   -11,   -11,   -11,    -7,
-   -11,   -10 ]
+   -12,   -12,   -12,    -3,   -12,   -12,   -12,    -1,   -12,   -12,
+   -12,   -12,    -2,   -12,   -12,    -5,   -11,    -9,    -6,   -12,
+   -12,    36,   -12,   -12,    -8,   -12,   -12,   -12,    -4,   -12,
+   -12,   -12,   -12,    -7,   -12,   -10 ]
 
 racc_goto_table = [
-     4,    16,   nil,    10,   nil,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,   nil,   nil,   nil,    21,   nil,    22,
-    10,    10,   nil,   nil,   nil,    27,    10,   nil,    30,    10 ]
+     5,    18,   nil,   nil,    12,   nil,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
+    25,   nil,    26,   nil,    12,    12,   nil,   nil,   nil,    31,
+    12,   nil,    34,    12 ]
 
 racc_goto_check = [
-     1,     3,   nil,     2,   nil,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,   nil,   nil,   nil,   nil,   nil,     1,   nil,     1,
-     2,     2,   nil,   nil,   nil,     1,     2,   nil,     1,     2 ]
+     1,     3,   nil,   nil,     2,   nil,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,   nil,
+     1,   nil,     1,   nil,     2,     2,   nil,   nil,   nil,     1,
+     2,   nil,     1,     2 ]
 
 racc_goto_pointer = [
-   nil,     0,    -1,    -6 ]
+   nil,     0,    -1,    -7 ]
 
 racc_goto_default = [
-   nil,   nil,     6,   nil ]
+   nil,   nil,     7,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
@@ -79,13 +85,14 @@ racc_reduce_table = [
   3, 19, :_reduce_5,
   3, 19, :_reduce_6,
   7, 19, :_reduce_7,
-  1, 20, :_reduce_8,
+  4, 19, :_reduce_8,
   1, 20, :_reduce_9,
-  7, 20, :_reduce_10 ]
+  7, 20, :_reduce_10,
+  1, 20, :_reduce_11 ]
 
-racc_reduce_n = 11
+racc_reduce_n = 12
 
-racc_shift_n = 32
+racc_shift_n = 36
 
 racc_token_table = {
   false => 0,
@@ -103,8 +110,8 @@ racc_token_table = {
   :END => 12,
   "=" => 13,
   "{" => 14,
-  "$" => 15,
-  "}" => 16 }
+  "}" => 15,
+  "$" => 16 }
 
 racc_nt_base = 17
 
@@ -142,8 +149,8 @@ Racc_token_to_s_table = [
   "END",
   "\"=\"",
   "\"{\"",
-  "\"$\"",
   "\"}\"",
+  "\"$\"",
   "$start",
   "Statements",
   "Statement",
@@ -204,16 +211,16 @@ module_eval(<<'.,.,', 'grammar.y', 27)
   end
 .,.,
 
-module_eval(<<'.,.,', 'grammar.y', 31)
+module_eval(<<'.,.,', 'grammar.y', 28)
   def _reduce_8(val, _values, result)
-     result = Node::Number.new val[0] 
+     result = Node::Application.new val[1], val[2] 
     result
   end
 .,.,
 
 module_eval(<<'.,.,', 'grammar.y', 32)
   def _reduce_9(val, _values, result)
-     result = Node::Literal.new val[0] 
+     result = Node::Number.new val[0] 
     result
   end
 .,.,
@@ -221,6 +228,13 @@ module_eval(<<'.,.,', 'grammar.y', 32)
 module_eval(<<'.,.,', 'grammar.y', 33)
   def _reduce_10(val, _values, result)
      result = Node::Procedure.new val[3], val[5] 
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 34)
+  def _reduce_11(val, _values, result)
+     result = Node::Literal.new val[0] 
     result
   end
 .,.,

@@ -35,6 +35,8 @@ module Carroll::Runtime
     def _reference=(entity) @reference = entity end
   end
 
+  # TODO: change #value to #dereference and #_value to #value
+  # TODO: Cache literals as they are immutable
   class Value < Entity
     def initialize(value) @value = value end
     def value() self end
@@ -52,9 +54,14 @@ module Carroll::Runtime
     end
 
     class Procedure < Value
-      def initialize environment, arg, body
-        @environment, @arg, @body = environment, arg, body
+      def initialize environment, param, body
+        @environment, @param, @body = environment, param, body
         super self
+      end
+
+      def apply arg
+        @environment[@param] = arg
+        @body.eval @environment
       end
     end
 
