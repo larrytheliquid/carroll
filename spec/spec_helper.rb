@@ -40,12 +40,15 @@ share_specs "Statements" do
               "Result" => "1337"
     spec_code "local P in P = proc {$ X} skip end end"
     spec_code "local P in local A in P = proc {$ X} skip end A = 1337 {P A} end end"
+    spec_code "local V in local A in V = foo A = 1337 {V A} end end", :error
+    spec_code "local P in local A in local B in P = proc {$ X} skip end A = 1337 {P A B} end end end", :error # arity mismatch
     spec_code "local P in local A in P = proc {$ X} Result = X end A = 1337 {P A} end end",
               "Result" => "1337"
     spec_code "local P in local A in P = proc {$ X} Result = A end A = 1337 {P A} end end",
               "Result" => "1337"
     spec_code "local P in local A in local B in local Z in P = proc {$ X Y} A2 = X B2 = Y Z2 = Z end A = a B = b Z = z {P A B} end end end end",
               "A2" => "a", "B2" => "b", "Z2" => "z"
+    spec_code "local Condition in Condition = foo if Condition then skip else skip end end", :error
     spec_code "local Condition in Condition = true if Condition then Result = 1337 else skip end end",
               "Result" => "1337"
     spec_code "local Condition in Condition = false if Condition then skip else Result = 1337 end end",
@@ -63,5 +66,3 @@ share_specs "Statements" do
     spec_code "skip skip local Foo in Foo = false skip Result = Foo end skip", "Result" => "false"
   end
 end
-
-# TODO: invalid syntax and semantics specs

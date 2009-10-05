@@ -74,7 +74,9 @@ module Carroll::Node
     end
 
     def eval environment
-      environment.fetch(@name).dereference.apply @targets.map{|t| environment.fetch t }
+      procedure = environment.fetch(@name).dereference
+      raise "Can only apply a Procedure: #{procedure.inspect}" unless procedure.respond_to? :apply
+      procedure.apply @targets.map{|t| environment.fetch t }
     end
   end
 

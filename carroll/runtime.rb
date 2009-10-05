@@ -54,6 +54,7 @@ module Carroll::Runtime
       end
 
       def apply args
+        raise "Arity mismatch #{@params.size} != #{args.size}" if @params.size != args.size
         @params.each_with_index do |param, i|
           @environment[param] = args[i]
         end
