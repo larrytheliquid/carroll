@@ -3,6 +3,7 @@ module Carroll::Runtime
 
   class Variable < Entity
     @@store = []
+    attr_accessor :reference
     def initialize
       @reference = self
       @@store << self
@@ -12,39 +13,32 @@ module Carroll::Runtime
       raise "Not unifying an Entity: #{entity.inspect}" unless entity.is_a? Entity
       @@store.each do |variable|
         if variable.references? self
-          variable.send :_reference=, if entity.is_a? Value
+          variable.reference = if entity.is_a? Value
             entity
           else
-            entity.send :_reference
+            entity.reference
           end
         end
       end
       entity
     end
 
-    def value
+    def dereference
       raise "Variable unbound: #{inspect}" if @reference.is_a? Variable
       @reference
     end
 
     def references?(entity) @reference.equal? entity end
-
-  private
-
-    def _reference() @reference end
-    def _reference=(entity) @reference = entity end
   end
 
-  # TODO: change #value to #dereference and #_value to #value
   # TODO: Cache literals as they are immutable
   class Value < Entity
     def initialize(value) @value = value end
-    def value() self end
-    def _value() @value end
+    def value() @value end
     def print() @value.to_s end
 
     def ==(other)
-      @value == other._value
+      @value == other.value
     end
 
     class Number < Value

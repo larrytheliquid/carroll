@@ -57,7 +57,7 @@ module Carroll::Node
     end
 
     def eval environment
-      condition_value = environment.fetch(@condition).value
+      condition_value = environment.fetch(@condition).dereference
       if condition_value == Carroll::Runtime::Value::Literal.new("true")
         @if_body.eval environment
       elsif condition_value == Carroll::Runtime::Value::Literal.new("false")
@@ -74,7 +74,7 @@ module Carroll::Node
     end
 
     def eval environment
-      environment.fetch(@name).value.apply @targets.map{|t| environment.fetch t }
+      environment.fetch(@name).dereference.apply @targets.map{|t| environment.fetch t }
     end
   end
 

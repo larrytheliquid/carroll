@@ -10,7 +10,7 @@ describe "Runtime" do
       end.flatten]
 
       Hash[*ast.eval(environment).map do |identifier, variable|
-        [identifier, variable.value.print]
+        [identifier, variable.dereference.print]
       end.flatten].should == expected_bindings
     end
   end
