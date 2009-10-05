@@ -54,13 +54,15 @@ module Carroll::Runtime
     end
 
     class Procedure < Value
-      def initialize environment, param, body
-        @environment, @param, @body = environment, param, body
+      def initialize environment, params, body
+        @environment, @params, @body = environment, params, body
         super self
       end
 
-      def apply arg
-        @environment[@param] = arg
+      def apply args
+        @params.each_with_index do |param, i|
+          @environment[param] = args[i]
+        end
         @body.eval @environment
       end
     end

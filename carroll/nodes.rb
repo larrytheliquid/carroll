@@ -69,12 +69,12 @@ module Carroll::Node
   end
 
   class Application
-    def initialize name, target
-      @name, @target = name, target
+    def initialize name, targets
+      @name, @targets = name, targets
     end
 
     def eval environment
-      environment.fetch(@name).value.apply environment.fetch(@target)
+      environment.fetch(@name).value.apply @targets.map{|t| environment.fetch t }
     end
   end
 
@@ -89,12 +89,12 @@ module Carroll::Node
   end
 
   class Procedure
-    def initialize param, body
-      @param, @body = param, body
+    def initialize params, body
+      @params, @body = params, body
     end
 
     def eval environment
-      Carroll::Runtime::Value::Procedure.new environment.dup, @param, @body
+      Carroll::Runtime::Value::Procedure.new environment.dup, @params, @body
     end
   end
 

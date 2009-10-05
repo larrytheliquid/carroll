@@ -44,6 +44,8 @@ share_specs "Statements" do
               "Result" => "1337"
     spec_code "local P in local A in P = proc { $ X } Result = A end A = 1337 { P A } end end",
               "Result" => "1337"
+    spec_code "local P in local A in local B in local Z in P = proc { $ X Y } A2 = X B2 = Y Z2 = Z end A = a B = b Z = z { P A B } end end end end",
+              "A2" => "a", "B2" => "b", "Z2" => "z"
     spec_code "local Condition in Condition = true if Condition then Result = 1337 else skip end end",
               "Result" => "1337"
     spec_code "local Condition in Condition = false if Condition then skip else Result = 1337 end end",

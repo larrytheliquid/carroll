@@ -20,18 +20,23 @@ rule
   | Statements Statement                              { result = val[0] << val[1] }
   ;
 
+  Identifiers:
+    IDENTIFIER                                        { result = Array(val[0]) }
+  | Identifiers IDENTIFIER                            { result = val[0] << val[1] }
+  ;
+
   Statement:
     SKIP                                              { result = Node::Skip }
   | LOCAL IDENTIFIER IN Statements END                { result = Node::Local.new val[1], val[3] }
   | IDENTIFIER '=' IDENTIFIER                         { result = Node::UnifyVariable.new val[0], val[2] }
   | IDENTIFIER '=' Value                              { result = Node::UnifyValue.new val[0], val[2] }
   | IF IDENTIFIER THEN Statements ELSE Statements END { result = Node::Conditional.new val[1], val[3], val[5] }
-  | '{' IDENTIFIER IDENTIFIER '}'                     { result = Node::Application.new val[1], val[2] }
+  | '{' IDENTIFIER Identifiers '}'                    { result = Node::Application.new val[1], val[2] }
   ;
 
   Value:
     NUMBER                                            { result = Node::Number.new val[0] }
-  | PROC '{' '$' IDENTIFIER '}' Statements END        { result = Node::Procedure.new val[3], val[5] }
+  | PROC '{' '$' Identifiers '}' Statements END       { result = Node::Procedure.new val[3], val[5] }
   | LITERAL                                           { result = Node::Literal.new val[0] }
   ;
 end
