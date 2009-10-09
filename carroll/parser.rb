@@ -281,7 +281,7 @@ module_eval(<<'.,.,', 'grammar.y', 43)
 
 module_eval(<<'.,.,', 'grammar.y', 44)
   def _reduce_15(val, _values, result)
-     result = Node::Literal.new val[0] 
+     result = Node::Literal.new val[0], val[2], val[4] 
     result
   end
 .,.,

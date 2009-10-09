@@ -2,7 +2,7 @@ class Carroll::Lexer
   KEYWORDS = %w[skip local in if then else proc end]
 
   def tokenize code
-    code.strip!
+    code = code.strip
     code_size = code.size
     i , tokens = 0, []
 

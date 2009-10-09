@@ -42,7 +42,7 @@ rule
 
   Record:
     LITERAL                                           { result = Node::Literal.new val[0] }
-  | LITERAL'('Feature':' IDENTIFIER')'                { result = Node::Literal.new val[0] }
+  | LITERAL '(' Feature ':' IDENTIFIER ')'            { result = Node::Literal.new val[0], val[2], val[4] }
   ;
 
   Feature:

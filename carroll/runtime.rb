@@ -63,8 +63,19 @@ module Carroll::Runtime
     end
 
     class Literal < Value
-      def initialize value
-        super value.to_sym
+      def initialize label, pairs
+        super :label => label, :pairs => pairs
+      end
+
+      def label() @value.fetch :label end
+      def pairs() @value.fetch :pairs end
+
+      def print
+        if pairs.empty?
+          label.to_s
+        else
+          "#{label}(#{pairs.map{|k,v| [k.print, v.print] * ':' } * ' '})"
+        end
       end
     end
   end

@@ -58,9 +58,9 @@ module Carroll::Node
 
     def eval environment
       condition_value = environment.fetch(@condition).dereference
-      if condition_value == Carroll::Runtime::Value::Literal.new("true")
+      if condition_value == Carroll::Runtime::Value::Literal.new("true", {})
         @if_body.eval environment
-      elsif condition_value == Carroll::Runtime::Value::Literal.new("false")
+      elsif condition_value == Carroll::Runtime::Value::Literal.new("false", {})
         @else_body.eval environment
       else
         raise %{Conditionals must branch on "true" or "false"}
@@ -101,12 +101,15 @@ module Carroll::Node
   end
 
   class Literal
-    def initialize value
-      @value = value
+    def initialize label, *pairs
+      @label, @pairs = label, pairs
     end
 
-    def eval _
-      Carroll::Runtime::Value::Literal.new @value
+    def eval environment
+      pairs = Hash[@pairs.each_slice(2).map do |pair|
+        [pair.first.eval(environment), environment.fetch(pair.last).dereference]
+      end]
+      Carroll::Runtime::Value::Literal.new @label, pairs
     end
   end
 end

@@ -16,7 +16,8 @@ share_specs "Value expressions" do
   end
 
   describe "<record>" do
-    ["numbers(one:One)", "numbers(1:One)"].each do |record|
+    ["numbers(one:One)", "numbers(1:One)",
+     "list(1:A 2:list(1:B 2:Nil))"].each do |record|
       spec_code record
     end
   end
@@ -44,6 +45,8 @@ share_specs "Statements" do
     spec_code "Answer = 42", "Answer" => "42"
     spec_code "local LarryTheLiquid in LarryTheLiquid = 1337 Result = LarryTheLiquid end",
               "Result" => "1337"
+    spec_code "local One in One = 1 Result = numbers(one:One) end",
+              "Result" => "numbers(one:1)"
     spec_code "local P in P = proc {$ X} skip end end"
     spec_code "local P in local A in P = proc {$ X} skip end A = 1337 {P A} end end"
     spec_code "local V in local A in V = foo A = 1337 {V A} end end", :error
